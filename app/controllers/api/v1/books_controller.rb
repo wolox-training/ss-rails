@@ -4,7 +4,13 @@ module Api
       def info
         open_library = OpenLibrary.new(params[:isbn])
         book = open_library.fetch_data
-        render json: { status: 'Success', message: 'Loaded book', data: book }
+        respond_to do |format|
+          if book != 'not found'
+            format.json { render json: { status: 'Success', message: 'Loaded book', data: book }, status: :ok }
+          else
+            format.json { render json: { status: 'Unprocessable Entity', message: 'Book not found'}, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end

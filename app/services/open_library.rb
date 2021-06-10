@@ -7,17 +7,22 @@ class OpenLibrary
   end
 
   def fetch_data
-    response = JSON.parse(books)
-    response = response[@isbn.to_s].slice('title', 'subtitle', 'authors', 'number_of_pages')
-    response['isbn'] = @isbn
-    response['authors'] = take_authors(response['authors'])
-    response
+    response = books
+    if response != 'not found'
+      response = JSON.parse(response)
+      response = response[@isbn.to_s].slice('title', 'subtitle', 'authors', 'number_of_pages')
+      response['isbn'] = @isbn
+      response['authors'] = take_authors(response['authors'])
+      response
+    else
+      response
+    end
   end
 
   def books
     uri = "https://openlibrary.org/api/books?bibkeys=#{@isbn}&format=json&jscmd=data"
     res = Faraday.get(uri)
-    res.body if res.status == 200
+    res.body != '{}' ? res.body : 'not found'
   end
 
   private
