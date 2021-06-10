@@ -1,22 +1,23 @@
-class OpenLibrary < ApplicationService
-  include HTTParty
-  base_uri 'openlibrary.org/api'
+class OpenLibrary
+  require 'faraday'
+  require 'json'
 
   def initialize(isbn)
-    @options = { query: { bibkeys: isbn, format: 'json', jscmd: 'data' } }
     @isbn = isbn
   end
 
   def fetch_data
-    response = books
-    response = response["ISBN:#{@isbn}"].slice('title', 'subtitle', 'authors', 'number_of_pages')
-    response['isbn'] = isbn
+    response = JSON.parse(books)
+    response = response["#{@isbn}"].slice('title', 'subtitle', 'authors', 'number_of_pages')
+    response['isbn'] = @isbn
     response['authors'] = take_authors(response['authors'])
     response
   end
 
   def books
-    self.class.get('/books', @options)
+    uri = "https://openlibrary.org/api/books?bibkeys=#{@isbn}&format=json&jscmd=data"
+    res = Faraday.get(uri)
+    res.body if res.status == 200
   end
 
   private
