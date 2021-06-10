@@ -28,6 +28,7 @@ gem 'rubocop-rails', require: false
 # gem 'image_processing', '~> 1.2'
 gem 'devise'
 gem 'devise_token_auth'
+gem 'httparty', '~> 0.13.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
