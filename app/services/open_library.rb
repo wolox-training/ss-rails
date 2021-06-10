@@ -8,7 +8,7 @@ class OpenLibrary
 
   def fetch_data
     response = JSON.parse(books)
-    response = response["#{@isbn}"].slice('title', 'subtitle', 'authors', 'number_of_pages')
+    response = response[@isbn.to_s].slice('title', 'subtitle', 'authors', 'number_of_pages')
     response['isbn'] = @isbn
     response['authors'] = take_authors(response['authors'])
     response
