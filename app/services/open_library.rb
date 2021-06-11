@@ -5,7 +5,6 @@ class OpenLibrary
   def initialize(isbn)
     @isbn = isbn
     @options = { bibkeys: "ISBN:#{isbn}", format: 'json', jscmd: 'data' }
-    @base_url = 'https://openlibrary.org/api'
   end
 
   def fetch_data
@@ -17,7 +16,8 @@ class OpenLibrary
   end
 
   def find_book
-    url = "#{@base_url}/books"
+    url = "#{Rails.application.credentials.config[:url]}/books"
+    byebug
     res = Faraday.get(url, @options)
     JSON.parse(res.body)
   end
