@@ -4,7 +4,7 @@ class OpenLibrary
 
   def initialize(isbn)
     @isbn = isbn
-    @options = { query: { bibkeys: "ISBN:#{isbn}", format: 'json', jscmd: 'data' } }
+    @options = { bibkeys: "ISBN:#{isbn}", format: 'json', jscmd: 'data' }
     @base_url = 'https://openlibrary.org/api'
   end
 
@@ -17,8 +17,8 @@ class OpenLibrary
   end
 
   def find_book
-    # URL = "#{@BASE_URL}/BOOKS"
-    res = Faraday.get("https://openlibrary.org/api/books?bibkeys=ISBN:#{@isbn}&format=json&jscmd=data")
+    url = "#{@base_url}/books"
+    res = Faraday.get(url, @options)
     JSON.parse(res.body)
   end
 
