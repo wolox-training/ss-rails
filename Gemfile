@@ -33,10 +33,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'fictium'
+  gem 'rspec-rails', '~> 3.6'
   gem 'rubocop', '~> 1.16', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'rspec-rails', '~> 3.6'
 end
 
 group :development do
