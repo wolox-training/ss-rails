@@ -25,8 +25,9 @@ class OpenLibrary
   private
 
   def make_book_hash(book)
-    book["ISBN:#{@isbn}"].slice('title', 'subtitle', 'authors', 'number_of_pages').merge(isbn: @isbn)
-    book['authors'] = take_authors(book['authors'])
+    book = book["ISBN:#{@isbn}"]
+           .slice('title', 'subtitle', 'authors', 'number_of_pages')
+           .merge('isbn' => @isbn, 'authors' => take_authors(book["ISBN:#{@isbn}"]['authors']))
     book
   end
 
