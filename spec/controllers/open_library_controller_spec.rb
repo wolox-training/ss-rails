@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe OpenLibraryController do
-  describe action 'GET #show', type: :request do
+  describe action 'GET #show' do
     describe example 'when is valid' do
       before do
         stubbed_service = instance_double(OpenLibrary)
@@ -9,12 +9,12 @@ describe OpenLibraryController do
         allow(stubbed_service).to receive(:fetch_data).and_return({ 'title' => 'Originals', 'authors' => ['Adam Grant'] })
       end
 
-      it 'Found book' do
+      it 'found book' do
         get '/open_library/0385472579'
         expect(response.status).to be(200)
       end
 
-      it 'Show the book title' do
+      it 'show the book title' do
         get '/open_library/0385472579'
         expect(JSON.parse(response.body)['title']).to eql('Originals')
       end
@@ -24,17 +24,17 @@ describe OpenLibraryController do
       before do
         stubbed_service = instance_double(OpenLibrary)
         allow(OpenLibrary).to receive(:new).with('0385472578').and_return(stubbed_service)
-        allow(stubbed_service).to receive(:fetch_data).and_return('not found')
+        allow(stubbed_service).to receive(:fetch_data).and_return({})
       end
 
-      it 'Book not found' do
+      it 'book not found' do
         get '/open_library/0385472578'
-        expect(response.status).to be(422)
+        expect(response.status).to be(404)
       end
 
-      it 'Status: unprocessable entity' do
-        get '/open_library/0385472579'
-        expect(JSON.parse(response.body)).to eql('{}')
+      it 'message: book not found' do
+        get '/open_library/0385472578'
+        expect(JSON.parse(response.body)['errors'].first['message']).to eql('book not found')
       end
     end
   end

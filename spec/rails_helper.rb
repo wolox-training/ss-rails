@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'fictium/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
@@ -31,6 +32,11 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
+end
+
+Fictium.configure do |config|
+  # You will require to configure the fixture path, if you want to use fixtures
+  config.fixture_path = File.join(__dir__, 'support', 'docs')
 end
 
 RSpec.configure do |config|
