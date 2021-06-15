@@ -6,7 +6,8 @@ describe OpenLibraryController do
       before do
         stubbed_service = instance_double(OpenLibrary)
         allow(OpenLibrary).to receive(:new).with('0385472579').and_return(stubbed_service)
-        allow(stubbed_service).to receive(:fetch_data).and_return({ 'title' => 'Originals', 'authors' => ['Adam Grant'] })
+        allow(stubbed_service).to receive(:fetch_data)
+          .and_return({ 'title' => 'Originals', 'authors' => ['Adam Grant'] })
       end
 
       it 'found book' do
