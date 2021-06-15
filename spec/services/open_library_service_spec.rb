@@ -1,40 +1,40 @@
 require 'rails_helper'
 
-describe OpenLibraryService do
-  describe action 'GET #show', type: :request do
-    describe example 'when is valid' do
+describe OpenLibrary do
+  mocks = OpenLibraryServiceMock.new
+
+  describe 'GET open_library#show' do
+    context 'with a valid ISBN' do
       before do
-        stubbed_service = instance_double(OpenLibrary)
-        allow(OpenLibrary).to receive(:new).with('0385472579').and_return(stubbed_service)
-        allow(stubbed_service).to receive(:fetch_data).and_return({ 'title' => 'Originals', 'authors' => ['Adam Grant'] })
+        mocks.request_success
       end
 
-      it 'Found book' do
-        get '/open_library/0385472579'
-        expect(response.status).to be(200)
+      let!(:service) { described_class.new('0385472579') }
+
+      it 'makes an external request' do
+        expect(WebMock).to have_requested(:get, 'https://openlibrary.org/api/books')
+          .with(query: { bibkeys: '0385472579', format: 'json', jscmd: 'data' })
       end
 
-      it 'Show the book title' do
-        get '/open_library/0385472579'
-        expect(JSON.parse(response.body)['title']).to eql('Originals')
+      it 'returns a hash with the correct title' do
+        expect(service.fetch_data[:title]).to eq('Zen speaks')
       end
     end
 
-    describe example 'when is not valid' do
+    context 'with a invalid ISBN' do
       before do
-        stubbed_service = instance_double(OpenLibrary)
-        allow(OpenLibrary).to receive(:new).with('0385472578').and_return(stubbed_service)
-        allow(stubbed_service).to receive(:fetch_data).and_return('not found')
+        mocks.request_empty
       end
 
-      it 'Book not found' do
-        get '/open_library/0385472578'
-        expect(response.status).to be(422)
+      let!(:service) { described_class.new('0385472578') }
+
+      it 'makes an external request' do
+        expect(WebMock).to have_requested(:get, 'https://openlibrary.org/api/books')
+          .with(query: { bibkeys: '0385472578', format: 'json', jscmd: 'data' })
       end
 
-      it 'Status: unprocessable entity' do
-        get '/open_library/0385472579'
-        expect(JSON.parse(response.body)).to eql('{}')
+      it 'returns a empty hash' do
+        expect(service.fetch_data[:title]).to eq('Zen speaks')
       end
     end
   end

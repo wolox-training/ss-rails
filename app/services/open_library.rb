@@ -2,7 +2,7 @@ class OpenLibrary
   require 'faraday'
   require 'json'
 
-  URL = "#{Rails.application.credentials.config[:url]}/books"
+  URL = "#{Rails.application.credentials.config[:url]}/books".freeze
 
   def initialize(isbn)
     @isbn = isbn
