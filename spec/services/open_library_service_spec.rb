@@ -13,7 +13,12 @@ describe OpenLibrary do
 
       it 'makes an external request' do
         expect(WebMock).to have_requested(:get, 'https://openlibrary.org/api/books')
-          .with(query: { bibkeys: '0385472579', format: 'json', jscmd: 'data' })
+          .with(query: { bibkeys: '0385472579', format: 'json', jscmd: 'data' },
+            headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'User-Agent'=>'Faraday v1.4.2'
+              })
       end
 
       it 'returns a hash with the correct title' do
@@ -30,7 +35,12 @@ describe OpenLibrary do
 
       it 'makes an external request' do
         expect(WebMock).to have_requested(:get, 'https://openlibrary.org/api/books')
-          .with(query: { bibkeys: '0385472578', format: 'json', jscmd: 'data' })
+          .with(query: { bibkeys: '0385472578', format: 'json', jscmd: 'data' },
+            headers: {
+              'Accept'=>'*/*',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'User-Agent'=>'Faraday v1.4.2'
+              })
       end
 
       it 'returns a empty hash' do

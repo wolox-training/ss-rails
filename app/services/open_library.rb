@@ -11,9 +11,7 @@ class OpenLibrary
 
   def fetch_data
     response = find_book
-    unless response.empty?
-      response = make_book_hash(response)
-    end
+    response = make_book_hash(response) unless response.empty?
     response
   end
 
