@@ -26,8 +26,12 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'faraday'
+gem 'friendly_id', '~> 5.4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'panko_serializer'
+gem 'rack-reducer', require: 'rack/reducer'
+gem 'wor-paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -35,13 +39,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'fictium'
-  gem 'panko_serializer'
-  gem 'rack-reducer', require: 'rack/reducer'
   gem 'rspec-rails', '~> 3.6'
   gem 'rubocop', '~> 1.16', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'wor-paginate'
 end
 
 group :development do
