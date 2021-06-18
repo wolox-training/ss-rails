@@ -3,11 +3,7 @@ class BooksController < ApplicationController
   include Wor::Paginate
 
   def index
-    books = Rack::Reducer.call(params, dataset: Book.all, filters: [
-      ->(author:) { where('lower(author) like ?', "%#{author.downcase}%") },
-      ->(genre:) { where('lower(book_genre) like ?', "%#{genre.downcase}%") },
-      ->(title:) { where('lower(title) like ?', "%#{title.downcase}%") }
-    ])
+    books = Book::Reducer.apply(params)
     render_paginated books, each_serializer: BookSerializer
   end
 
