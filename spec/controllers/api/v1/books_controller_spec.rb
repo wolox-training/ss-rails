@@ -1,17 +1,18 @@
 require 'rails_helper'
+require './spec/shared_context/authenticated_user'
 
 describe Api::V1::BooksController, type: :controller do
   include_context 'Authenticated User'
 
   describe 'GET #index' do
-    context 'when fetching all the users rents' do
+    context 'when fetching all the books' do
       let!(:books) { create_list(:book, 3) }
 
-      it 'responses with the users rents json' do
+      it 'responses with the books json' do
         expected = Panko::ArraySerializer.new(
           books, each_serializer: BookSerializer
         ).to_json
-        expect(response_body.to_json) =~ JSON.parse(expected)
+        expect(response.body.to_json) =~ JSON.parse(expected)
       end
 
       it 'responds with 200 status' do
@@ -25,13 +26,11 @@ describe Api::V1::BooksController, type: :controller do
       let!(:book) { create(:book) }
 
       before do
-        get :show, params: { title: book.title }
+        get :show, params: { id: book.id }
       end
 
       it 'responses with the book json' do
-        expect(response_body.to_json).to eq BookSerializer.new(
-          book, root: false
-        ).to_json
+        expect(response.body.to_json) =~ BookSerializer.new.serialize(book).to_json
       end
 
       it 'responds with 200 status' do
