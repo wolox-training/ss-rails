@@ -2,49 +2,38 @@ require 'rails_helper'
 
 describe OpenLibrary do
   mocks = OpenLibraryServiceMock.new
-
+  service = described_class.new('0385472579')
+  bad_request_service = described_class.new('0385472578')
   describe 'GET open_library#show' do
     context 'with a valid ISBN' do
       before do
         mocks.request_success
+        service.fetch_data
       end
-
-      let!(:service) { described_class.new('0385472579') }
 
       it 'makes an external request' do
         expect(WebMock).to have_requested(:get, 'https://openlibrary.org/api/books')
-          .with(query: { bibkeys: '0385472579', format: 'json', jscmd: 'data' },
-            headers: {
-              'Accept'=>'*/*',
-              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'User-Agent'=>'Faraday v1.4.2'
-              })
+          .with(query: { bibkeys: '0385472579', format: 'json', jscmd: 'data' })
       end
 
       it 'returns a hash with the correct title' do
-        expect(service.fetch_data[:title]).to eq('Zen speaks')
+        expect(service.fetch_data['title']).to eq('Zen speaks')
       end
     end
 
     context 'with a invalid ISBN' do
       before do
         mocks.request_empty
+        bad_request_service.fetch_data
       end
-
-      let!(:service) { described_class.new('0385472578') }
 
       it 'makes an external request' do
         expect(WebMock).to have_requested(:get, 'https://openlibrary.org/api/books')
-          .with(query: { bibkeys: '0385472578', format: 'json', jscmd: 'data' },
-            headers: {
-              'Accept'=>'*/*',
-              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'User-Agent'=>'Faraday v1.4.2'
-              })
+          .with(query: { bibkeys: '0385472578', format: 'json', jscmd: 'data' })
       end
 
       it 'returns a empty hash' do
-        expect(service.fetch_data[:title]).to eq('Zen speaks')
+        expect(bad_request_service.fetch_data).to eq({})
       end
     end
   end
