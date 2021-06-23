@@ -35,10 +35,12 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 2.18'
   gem 'fictium'
+  gem "panko_serializer"
   gem 'rspec-rails', '~> 3.6'
   gem 'rubocop', '~> 1.16', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'wor-paginate'
 end
 
 group :development do
