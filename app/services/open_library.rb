@@ -2,18 +2,16 @@ class OpenLibrary
   require 'faraday'
   require 'json'
 
-  URL = "#{Rails.application.credentials.config[:url]}/books"
+  URL = "#{Rails.application.credentials.config[:url]}/books".freeze
 
   def initialize(isbn)
     @isbn = isbn
-    @options = { bibkeys: "ISBN:#{isbn}", format: 'json', jscmd: 'data' }
+    @options = { bibkeys: isbn, format: 'json', jscmd: 'data' }
   end
 
   def fetch_data
     response = find_book
-    unless response.empty?
-      response = make_book_hash(response)
-    end
+    response = make_book_hash(response) unless response.empty?
     response
   end
 
@@ -25,9 +23,9 @@ class OpenLibrary
   private
 
   def make_book_hash(book)
-    book = book["ISBN:#{@isbn}"]
+    book = book[@isbn.to_s]
            .slice('title', 'subtitle', 'authors', 'number_of_pages')
-           .merge('isbn' => @isbn, 'authors' => take_authors(book["ISBN:#{@isbn}"]['authors']))
+           .merge('isbn' => @isbn, 'authors' => take_authors(book[@isbn]['authors']))
     book
   end
 
