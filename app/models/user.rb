@@ -7,5 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
   has_many :book_suggestions, dependent: :destroy
+  has_many :rents, dependent: :destroy
   validates :first_name, :last_name, :email, presence: true
 end
