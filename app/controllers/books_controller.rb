@@ -1,5 +1,4 @@
 class BooksController < ApplicationController
-  # before_action :authenticate_user!
   include Wor::Paginate
 
   def index
