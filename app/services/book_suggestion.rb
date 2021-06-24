@@ -1,10 +1,12 @@
 class BookSuggestionService
-  def new_book_suggestion(book_suggestion)
-    book_suggestion.user = current_user if user_signed_in?
-    if book_suggestion.save
-      render json: book_suggestion, status: :created
-    else
-      render json: { errors: [{ code: '422', message: book_suggestion.errors }] }, status: :unprocessable_entity
-    end
+  def initialize(suggestion_params, user)
+    @suggestion_params = suggestion_params
+    @user = user
+  end
+
+  def new_book_suggestion
+    book_suggestion = BookSuggestion.new(@suggestion_params)
+    book_suggestion.user = @user
+    book_suggestion
   end
 end
