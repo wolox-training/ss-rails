@@ -10,7 +10,7 @@ describe Api::V1::OpenLibraryController, type: :controller do
           .and_return({ 'title' => 'Originals', 'authors' => ['Adam Grant'] })
       end
 
-      it 'found book' do
+      it 'finds a book' do
         get :show, params: { isbn: '0385472579' }
         expect(response.status).to be(200)
       end
