@@ -6,36 +6,5 @@
     "version": "1"
   },
   "paths": {
-    "/api/v1/open_library": {
-      "description": "",
-      "get": {
-        "tags": [
-
-        ],
-        "description": "Show details of an open library.",
-        "parameters": [
-
-        ],
-        "responses": {
-          "default": {
-            "description": "with valid isbn {}",
-            "content": {
-              "text/plain": {
-                "example": ""
-              }
-            }
-          },
-          "200": {
-            "description": "with not valid isbn {}",
-            "content": {
-              "text/plain": {
-                "example": ""
-              }
-            }
-          }
-        },
-        "deprecated": false
-      }
-    }
   }
 }
