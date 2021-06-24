@@ -2,7 +2,6 @@ module Api
   module V1
     class BooksController < ApplicationController
       before_action :authenticate_user!
-      rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       include Wor::Paginate
 
       def index
