@@ -1,6 +1,6 @@
 module Api
   module V1
-    class OpenLibraryController < ApplicationController
+    class OpenLibraryController < ApiController
       def show
         book = OpenLibrary.new(params[:isbn]).fetch_data
         if book.empty?
