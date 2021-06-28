@@ -3,7 +3,8 @@ module Api
     class BookSuggestionsController < ApiController
       skip_before_action :authenticate_user!, only: :create
       def create
-        book_suggestion = Api::V1::BookSuggestionService.new(book_suggestion_params, current_user).new_book_suggestion
+        book_suggestion = BookSuggestion.new(book_suggestion_params)
+        book_suggestion.user = current_user if user_signed_in?
         if book_suggestion.save
           render json: book_suggestion, status: :created
         else

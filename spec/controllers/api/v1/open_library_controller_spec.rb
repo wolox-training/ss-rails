@@ -4,8 +4,8 @@ describe Api::V1::OpenLibraryController, type: :controller do
   describe action 'GET #show' do
     describe example 'with valid isbn' do
       before do
-        stubbed_service = instance_double(OpenLibrary)
-        allow(OpenLibrary).to receive(:new).with('0385472579').and_return(stubbed_service)
+        stubbed_service = instance_double(Api::V1::OpenLibrary)
+        allow(Api::V1::OpenLibrary).to receive(:new).with('0385472579').and_return(stubbed_service)
         allow(stubbed_service).to receive(:fetch_data)
           .and_return({ 'title' => 'Originals', 'authors' => ['Adam Grant'] })
       end
@@ -23,8 +23,8 @@ describe Api::V1::OpenLibraryController, type: :controller do
 
     describe example 'with not valid isbn' do
       before do
-        stubbed_service = instance_double(OpenLibrary)
-        allow(OpenLibrary).to receive(:new).with('0385472578').and_return(stubbed_service)
+        stubbed_service = instance_double(Api::V1::OpenLibrary)
+        allow(Api::V1::OpenLibrary).to receive(:new).with('0385472578').and_return(stubbed_service)
         allow(stubbed_service).to receive(:fetch_data).and_return({})
       end
 
