@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::OpenLibrary do
+describe OpenLibrary do
   mocks = OpenLibraryServiceMock.new
   service = described_class.new('0385472579')
   bad_request_service = described_class.new('0385472578')
