@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe OpenLibraryController do
+describe Api::V1::OpenLibraryController, type: :controller do
   describe action 'GET #show' do
     describe example 'with valid isbn' do
       before do
