@@ -8,7 +8,7 @@ module Api
       end
 
       def create
-        rent = Api::V1::RentService.new(rent_params, params[:user_id]).new_rent
+        rent = assign_rent
         if rent.save
           render json: rent, status: :created
         else
@@ -25,6 +25,12 @@ module Api
       end
 
       private
+
+      def assign_rent
+        rent ||= Rent.new(rent_params)
+        rent.user = current_user
+        rent
+      end
 
       def rent_params
         params.require(:rent).permit(:book_id, :start_of_rent, :end_of_rent)
