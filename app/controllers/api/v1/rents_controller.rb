@@ -2,12 +2,13 @@ module Api
   module V1
     class RentsController < ApiController
       def index
-        rents = current_user.rents.all
+        rents = policy_scope Rent
+        authorize rents
         render_paginated rents, each_serializer: RentSerializer
       end
 
       def create
-        rent = Api::V1::RentService.new(rent_params, current_user).new_rent
+        rent = Api::V1::RentService.new(rent_params, params[:user_id]).new_rent
         if rent.save
           render json: rent, status: :created
         else
