@@ -1,6 +1,5 @@
 class RentPolicy < ApplicationPolicy
   def index?
-    byebug
     user[:current_user] == user[:user_params]
   end
 
