@@ -39,10 +39,12 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 2.18'
   gem 'fictium'
+  gem 'pundit'
   gem 'rspec-rails', '~> 3.6'
   gem 'rubocop', '~> 1.16', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'sidekiq'
 end
 
 group :development do
