@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.16', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'sidekiq'
 end
 
 group :development do
