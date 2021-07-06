@@ -9,3 +9,7 @@
   - mailers
   - active_storage_analysis
   - active_storage_purge
+:schedule:
+  notice_rent:
+    cron: '0 9 * * * *'
+    class: NoticeRent

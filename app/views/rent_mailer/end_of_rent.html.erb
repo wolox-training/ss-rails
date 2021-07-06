@@ -4,15 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New rent created, yay!</h1>
-    <p>Rental creation date: <%=@rent.created_at%></p>
+    <h1>Your book rental has expired!</h1>
     <br>
-    <h3>Book information</h3>
     <h6>Book title: <%= @rent.book.title %> </h6>
-    <h6>Book author: <%= @rent.book.title %> </h6>
-    <br>
-    <h3>Rental information</h3>
-    <h6>Start date: <%= @rent.start_of_rent %> </h6>
-    <h6>Book author: <%= @rent.end_of_rent %> </h6>
+    <h6>End date: <%= @rent.end_of_rent %> </h6>
   </body>
 </html>

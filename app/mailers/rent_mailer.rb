@@ -6,6 +6,6 @@ class RentMailer < ApplicationMailer
 
   def end_of_rent(rent)
     @rent = rent
-    mail(to: @rent.user.email, subject: 'End of rent notice!')
+    mail(to: @rent.user.email, subject: 'Book rental expired!')
   end
 end
