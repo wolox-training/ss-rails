@@ -1,0 +1,12 @@
+es:
+  books:
+    book_title: Titulo del libro
+    end_date: Fecha final
+    your_book_rental_has_expired: El alquiler de su libro ha caducado!
+    start_date: Fecha de inicio
+    rental_creation_date: Fecha de creación del alquiler
+    new_rent_created: Nuevo alquiler creado
+    book_information: Información del libro
+    book_author: Autor del libro
+    rental_information: Información del alquiler
+    book_rental_expired: Alquiler de libro caducado!
