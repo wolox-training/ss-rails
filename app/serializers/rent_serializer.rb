@@ -1,5 +1,5 @@
 class RentSerializer < Panko::Serializer
-  attributes :id, :start_of_rent, :end_of_rent, :book, :user, :created_at, :updated_at
+  attributes :id, :start_of_rent, :end_of_rent, :returned_at, :book, :user
 
   def book
     {

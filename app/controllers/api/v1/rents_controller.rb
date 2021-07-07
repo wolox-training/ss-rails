@@ -15,6 +15,14 @@ module Api
         end
       end
 
+      def active
+        render_paginated Rent.active_rentals, each_serializer: RentSerializer
+      end
+
+      def book_rankings
+        render_paginated Book.rents_ranking, each_serializer: RankingSerializer
+      end
+
       private
 
       def assign_rent

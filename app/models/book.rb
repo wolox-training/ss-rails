@@ -3,6 +3,7 @@ class Book < ApplicationRecord
   friendly_id :title, use: :slugged
   validates :title, :year, :author, :image, :editor, :book_genre, presence: true
   has_many :rents, dependent: :destroy
+  scope :rents_ranking, -> { joins(:rents).group(:id).order('COUNT(books.id) DESC') }
 
   Reducer = Rack::Reducer.new(
     self.all,

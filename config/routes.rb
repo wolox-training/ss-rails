@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :users do
         resources :rents, only: [:create, :index]
       end
+      get 'rents/book_rankings', to: 'rents#book_rankings'
+      get 'rents/active', to: 'rents#active'
     end
   end
 end
