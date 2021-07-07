@@ -11,7 +11,7 @@ module Api
         rent = assign_rent
         authorize rent
         if rent.save
-          async_create(rent)
+          RentMailerJob.perform_later(rent)
           render json: rent, status: :created
         else
           render json: { errors: [{ code: '400', message: rent.errors }] }, status: :bad_request
@@ -40,10 +40,6 @@ module Api
 
       def pundit_user
         { current_user: current_user, user_params: User.find_by(id: params[:user_id]) }
-      end
-
-      def async_create(rent)
-        RentMailerJob.perform_later(rent)
       end
     end
   end
