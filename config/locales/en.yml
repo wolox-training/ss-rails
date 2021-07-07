@@ -30,4 +30,15 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  books:
+    book_title: Book title
+    end_date: End date
+    your_book_rental_has_expired: Your book rental has expired!
+    start_date: Start date
+    rental_creation_date: Rental creation date
+    new_rent_created: New rent created
+    book_information: Book information
+    book_author: Book author
+    rental_information: Rental information
+    book_rental_expired: Book rental expired
   hello: "Hello world"
