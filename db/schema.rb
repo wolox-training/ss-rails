@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_183744) do
   create_table "books", force: :cascade do |t|
     t.string "author", null: false
     t.string "image", null: false
-    t.string "title", null: false
+    t.string "title", limit: 25, null: false
     t.string "year", null: false
     t.string "editor", null: false
     t.string "book_genre", null: false
