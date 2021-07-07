@@ -2,6 +2,7 @@ module Api
   module V1
     class BookSuggestionsController < ApiController
       skip_before_action :authenticate_user!, only: :create
+
       def create
         book_suggestion = assign_book_suggestion
         if book_suggestion.save
