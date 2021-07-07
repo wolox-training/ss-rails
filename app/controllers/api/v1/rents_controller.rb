@@ -22,7 +22,7 @@ module Api
       end
 
       def book_rankings
-        render_paginated Book.ranking, each_serializer: RankingSerializer
+        render_paginated Book.rents_ranking, each_serializer: RankingSerializer
       end
 
       private
