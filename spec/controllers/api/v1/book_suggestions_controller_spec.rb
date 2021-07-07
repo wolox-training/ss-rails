@@ -31,9 +31,9 @@ describe Api::V1::BookSuggestionsController, type: :controller do
         expect(response.body['error']).to be_present
       end
 
-      it 'responds with 422 status' do
+      it 'responds with 400 status' do
         post_create
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:bad_request)
       end
     end
   end

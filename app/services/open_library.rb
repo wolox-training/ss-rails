@@ -24,8 +24,8 @@ class OpenLibrary
 
   def make_book_hash(book)
     book = book[@isbn.to_s]
-           .slice('title', 'subtitle', 'authors', 'number_of_pages')
-           .merge('isbn' => @isbn, 'authors' => take_authors(book[@isbn]['authors']))
+            .slice('title', 'subtitle', 'authors', 'number_of_pages')
+            .merge('isbn' => @isbn, 'authors' => take_authors(book[@isbn]['authors']))
     book
   end
 
