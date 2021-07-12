@@ -1,6 +1,7 @@
 module Api
   module V1
     class OpenLibraryController < ApiController
+      skip_before_action :authenticate_user!
       def show
         book = OpenLibrary.new(params[:isbn]).fetch_data
         if book.empty?

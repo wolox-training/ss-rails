@@ -4,7 +4,7 @@ module Api
       skip_before_action :authenticate_user!, only: :create
 
       def create
-        book_suggestion = Api::V1::BookSuggestionService.new(book_suggestion_params, current_user).new_book_suggestion
+        book_suggestion = assign_book_suggestion
         if book_suggestion.save
           render json: book_suggestion, status: :created
         else
@@ -13,6 +13,12 @@ module Api
       end
 
       private
+
+      def assign_book_suggestion
+        book_suggestion ||= BookSuggestion.new(book_suggestion_params)
+        book_suggestion.user = current_user if user_signed_in?
+        book_suggestion
+      end
 
       def book_suggestion_params
         params.require(:book_suggestion).permit(:title, :year, :synopsis, :price, :author, :editor, :link)

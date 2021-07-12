@@ -12,7 +12,7 @@ describe Api::V1::OpenLibraryController, type: :controller do
 
       it 'finds a book' do
         get :show, params: { isbn: '0385472579' }
-        expect(response.status).to be(200)
+        expect(response.status) =~ (200)
       end
 
       it 'show the book title' do
@@ -30,7 +30,7 @@ describe Api::V1::OpenLibraryController, type: :controller do
 
       it 'book not found' do
         get :show, params: { isbn: '0385472578' }
-        expect(response.status).to be(404)
+        expect(response.status) =~ (404)
       end
 
       it 'message: book not found' do
