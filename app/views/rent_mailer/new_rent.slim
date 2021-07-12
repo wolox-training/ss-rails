@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+  body
+    h1 <%= "\# t 'books.new_rent_created'  , yay!" %
+    p <%= "\# t 'books.rental_creation_date' }: \#{@rent.created_at " %
+    br/
+    h3 <%= t 'books.book_information' %
+    h6 <%= "\# t 'books.book_title' }: \#{@rent.book.title " %
+    h6 <%= "\# t 'books.book_author' }: \#{@rent.book.author " %
+    br/
+    h3 <%= t 'books.rental_information' %
+    h6 <%= "\# t 'books.start_date' }: \#{@rent.start_of_rent " %
+    h6 <%= "\# t 'books.end_date' }: \#{@rent.end_of_rent " %

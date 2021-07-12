@@ -31,6 +31,7 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'panko_serializer'
 gem 'rack-reducer', require: 'rack/reducer'
+gem 'slim'
 gem 'wor-paginate'
 
 group :development, :test do
