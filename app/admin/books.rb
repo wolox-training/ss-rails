@@ -13,4 +13,19 @@ ActiveAdmin.register Book do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  controller do
+    # ... other actions 
+
+    def create
+      @comment = Comment.new(params[:comment])
+
+      respond_to do |format|
+        if @comment.save
+          AdminMailer.comment_created(@comment.id).deliver
+          redirect_to @comment
+        end
+      end
+    end
+  end
 end
