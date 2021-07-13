@@ -11,8 +11,8 @@
     <h6><%= "#{t 'books.book_title' }: #{@rent.book.title}" %> </h6>
     <h6><%= "#{t 'books.book_author' }: #{@rent.book.author}" %> </h6>
     <br>
-    <h3><%= t 'books.rental_information' %></h3>
-    <h6><%= "#{t 'books.start_date' }: #{@rent.start_of_rent}" %> </h6>
-    <h6><%= "#{t 'books.end_date' }: #{@rent.end_of_rent}" %> </h6>
+    <h3>Rental information</h3>
+    <h6>Start date: <%= @rent.start_of_rent %> </h6>
+    <h6>End date: <%= @rent.end_of_rent %> </h6>
   </body>
 </html>
