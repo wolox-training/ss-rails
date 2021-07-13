@@ -6,6 +6,15 @@ ActiveAdmin.setup do |config|
   #
   config.site_title = "W Books Api"
 
+  ActiveAdmin::ResourceController.class_eval do
+    def find_resource
+      if resource_class.is_a?(FriendlyId)
+        scoped_collection.friendly.find(params[:id])
+      else
+        scoped_collection.find(params[:id])
+      end
+    end
+  end
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
