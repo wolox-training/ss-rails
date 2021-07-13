@@ -5,7 +5,7 @@ ActiveAdmin.register BookSuggestion do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :synopsis, :price, :author, :title, :link, :editor, :year, :user_id
+  permit_params :synopsis, :price, :author, :title, :link, :editor, :year, :user_id
   #
   # or
   #

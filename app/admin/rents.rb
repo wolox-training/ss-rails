@@ -5,7 +5,7 @@ ActiveAdmin.register Rent do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :user_id, :book_id, :start_of_rent, :end_of_rent, :returned_at
+  permit_params :user_id, :book_id, :start_of_rent, :end_of_rent
   #
   # or
   #
